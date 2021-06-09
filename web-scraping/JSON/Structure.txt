@@ -1,0 +1,54 @@
+Referee : 
+        - Name :: check
+
+
+Fighters : 
+        -  "Name" :: check
+        -  "Nickname" :: check
+        -  "Height" :: check
+        -  "Weight" :: check
+        -  "Reach" :: check
+        -  "Stance" :: check
+        -  "Wins" :: check
+        -  "Losses" :: check
+        -  "Draws" :: check
+        -  "Belt" :: check
+        -  "DateOfBirth" :: check
+        -  "SLpM" :: check
+        -  "StrAcc" :: check
+        -  "SApM" :: check
+        -  "StrDef" :: check
+        -  "TDAvg" :: check
+        -  "TDAcc" :: check
+        -  "TDDef" :: check
+        -  "SubAvg" :: check
+
+Location : 
+        -   "Country" :: check
+        -   "City"  :: check
+        -   "State" :: check
+
+Event : 
+        -   "Name" :: check 
+        -   "Date" :: check
+
+
+Fight :
+        -   "Bout" :: check
+        -   "RedCorner" :: check
+        -   "BlueCorner" :: check
+        -   "RedCornerResult" :: check
+        -   "BlueCornerResult" :: check
+        -   "Method" :: check
+        -   "Round" :: check
+        -   "TimeFormat" :: check
+        -   "Referee"
+        -   "(RedCorner|BlueCorner)_KD" :: check 
+        -   "(RedCorner|BlueCorner)_SigStr" :: check
+        -   "(RedCorner|BlueCorner)_SigStrPercentage" :: check
+        -   "(RedCorner|BlueCorner)_TotalStrikes" :: check
+        -   "(RedCorner|BlueCorner)_TD" :: check
+        -   "(RedCorner|BlueCorner)_TDPercentage" :: check
+        -   "(RedCorner|BlueCorner)_SubAtt" :: check
+        -   "(RedCorner|BlueCorner)_Reversal" :: check
+        -   "(RedCorner|BlueCorner)_CRTL" :: check
