@@ -107,3 +107,5 @@ dist
 # Ignore images folder
 images/full-body 
 images/face
+ufc-app/src/assets/Fighters/
+ufc-app/src/assets/Highlights.mp4
