@@ -1,0 +1,5 @@
+Fighters Name 
+
+Allow us to verify if the file have repeated names .
+
+sort names.txt | uniq -d > repeated.txt 
