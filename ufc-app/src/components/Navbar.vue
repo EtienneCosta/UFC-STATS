@@ -12,7 +12,7 @@
 
     <b-collapse id="navbar-toggle-collapse" is-nav>
       <b-navbar-nav class="ml-auto">
-        <b-nav-item href="#">
+        <b-nav-item href="/ufc/events">
           <img class="drop-icon" src="@/assets/boxing-ring.png"/>
             Events & Fights
         </b-nav-item>

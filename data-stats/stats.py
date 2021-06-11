@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import json
-with open('../Data/ufc.json','r') as ufcfile:
+with open('../web-scraping/JSON/ufc.json','r') as ufcfile:
     data = json.load(ufcfile)
     referees = data['Referees']
     fighters = data['Fighters']

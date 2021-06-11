@@ -82,38 +82,12 @@ export default {
     return {
       search: "",
       headers: [
-        {
-          text: "NAME",
-          value: "name",
-          sortable: true,
-          class: "black--text",
-          align: "start",
-        },
-        {
-          text: "NICKNAME",
-          value: "nickname",
-          sortable: true,
-          class: "black--text",
-        },
-        {
-          text: "HEIGHT",
-          value: "height",
-          sortable: true,
-          class: "black--text",
-        },
-        {
-          text: "WEIGHT",
-          value: "weight",
-          sortable: true,
-          class: "black--text",
-        },
+        { text: "NAME", value: "name", sortable: true, class: "black--text", align: "start" },
+        { text: "NICKNAME", value: "nickname", sortable: true, class: "black--text"},
+        { text: "HEIGHT", value: "height", sortable: true, class: "black--text" },
+        { text: "WEIGHT", value: "weight", sortable: true, class: "black--text" },
         { text: "REACH", value: "reach", sortable: true, class: "black--text" },
-        {
-          text: "STANCE",
-          value: "stance",
-          sortable: true,
-          class: "black--text",
-        },
+        { text: "STANCE", value: "stance", sortable: true, class: "black--text"},
         { text: "W", value: "wins", sortable: true, class: "black--text" },
         { text: "L", value: "losses", sortable: true, class: "black--text" },
         { text: "D", value: "draws", sortable: true, class: "black--text" },

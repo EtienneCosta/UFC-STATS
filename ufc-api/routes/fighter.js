@@ -66,7 +66,7 @@ router.get('/fights/:id',async function (req, res, next) {
     var query = `
 select ?fight ?redcorner  ?redcornerresult ?redcornerkd ?redsigstr ?redcornersubatt ?redcornertd
 ?bluecorner ?bluecornerresult ?bluecornerkd ?bluesigstr ?bluecornersubatt  ?bluecornertd
-?method ?round ?time ?event ?eventname ?refereename where { 
+?method ?round ?time ?event ?eventname ?refereename ?timeformat ?bout ?date where { 
 :${req.params.id} :participated ?fight .
  ?fight	:BlueCorner ?bluecorner ;
           :BlueCornerResult ?bluecornerresult;
@@ -83,10 +83,13 @@ select ?fight ?redcorner  ?redcornerresult ?redcornerkd ?redsigstr ?redcornersub
           :Method ?method ;
           :Round ?round	;
           :Time ?time ;
+          :Bout ?bout;
+          :TimeFormat ?timeformat;
           :wasarbitratedBy ?referee;
           :belong ?event.
- ?event :Name ?eventname .
- ?referee :Name ?refereename. } `
+          ?event :Name ?eventname ;
+                 :Date ?date.
+          ?referee :Name ?refereename. } `
 
  var result = await gdb.execQuery(query);
  result = result.results.bindings.map(bind => {
@@ -107,7 +110,10 @@ select ?fight ?redcorner  ?redcornerresult ?redcornerkd ?redsigstr ?redcornersub
         method:bind.method.value,
         round:bind.round.value,
         time:bind.time.value,
+        date:bind.date.value,
         referee:bind.refereename.value,
+        bout:bind.bout.value,
+        timeformat:bind.timeformat.value,
         event:bind.event.value.split('#')[1],
         eventname:bind.eventname.value
      }
