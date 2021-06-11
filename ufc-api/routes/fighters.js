@@ -61,4 +61,26 @@ router.get('/', async function (req, res) {
  
 })
 
+
+/* Get the name of all fighters */
+
+router.get('/names', async function (req, res) {
+  var query = `
+  select ?name where {
+    ?s a :Fighter;
+    		:Name ?name.
+}
+    order by ?name`
+
+  var result = await gdb.execQuery(query);
+      result = result.results.bindings.map(bind => {
+          return{
+            name:bind.name.value,
+          }
+        });
+        console.log(result)
+        res.status(200).jsonp(result);
+
+})
+
 module.exports = router;

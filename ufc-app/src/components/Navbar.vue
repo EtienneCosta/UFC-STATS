@@ -21,7 +21,7 @@
             Fighters
         </b-nav-item>
 
-        <b-nav-item href="#">
+        <b-nav-item href="/ufc/predictions">
           <img class="drop-icon" src="@/assets/prediction.png" />
           Predictions
         </b-nav-item>
