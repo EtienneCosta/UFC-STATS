@@ -121,7 +121,7 @@
 
     <div>
       <b-table-simple
-        style="width: 80%; margin: auto; margin-bottom: 35px"
+        style="width: 100%; margin: auto; margin-bottom: 35px"
         hover
         medium
         responsive
@@ -228,9 +228,6 @@ export default {
   },
 
   methods: {
-    teste(){
-alert('Olá mundo')
-    },
       close () {
       this.dialog = false
     },
@@ -254,7 +251,7 @@ alert('Olá mundo')
         .get("http://localhost:8079/ufc/fighter/" + this.$route.params.id)
         .then((res) => {
           this.fighter = res.data[0];
-          var image_name = this.fighter.name.replace(" ", "-") + ".png";
+          var image_name = this.fighter.name.replaceAll(" ", "-") + ".png";
 
           try {
             this.image = require("@/assets/Fighters/" + image_name);

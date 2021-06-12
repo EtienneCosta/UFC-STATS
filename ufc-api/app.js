@@ -9,6 +9,8 @@ var fighterRouter = require('./routes/fighter')
 var fightRouter = require('./routes/fight')
 var statsRouter = require('./routes/stats')
 var eventsRouter = require('./routes/events')
+var repositorieRouter = require('./routes/repo')
+
 
 var app = express();
 
@@ -22,6 +24,8 @@ app.use('/ufc/fighter',fighterRouter);
 app.use('/ufc/fight',fightRouter);
 app.use('/ufc/stats',statsRouter);
 app.use('/ufc/events',eventsRouter);
+app.use('/ufc/repositorie',repositorieRouter);
+
 
 
 // catch 404 and forward to error handler

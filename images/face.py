@@ -12,18 +12,19 @@ import os
 import auxiliar as aux
 from progress.bar import IncrementalBar
 
-
+#class="c-listing-athlete__name"
+#class= node--type-athlete 
 def fightersimages(athletes:int):
     print("This may take a while, have a seat and drink a beer 🍻.") 
     bar = IncrementalBar('Loading',max=athletes)
 
-    for i in range(0,100):
+    for i in range(0,93):
           resp = req.get('https://www.ufc.com/athletes/all?gender=All&page='+str(i)).text
           soup = BeautifulSoup(resp,'html.parser')
-          infos = soup.find_all("div", {"class":"c-listing-athlete-flipcard__back"})
+          infos = soup.find_all("div", {"class":"node--type-athlete"})
           for info in infos :
-                if len(info.find_all("img")) > 0: 
-                    url=info.find_all("img")[0]['src']
+                if len(info.find_all("img" ,{"class":"image-style-teaser"})) > 0: 
+                    url=info.find_all("img" ,{"class":"image-style-teaser"})[0]['src']
                     if re.match(r'https',url):
                         name=info.find_all("span",{"class":"c-listing-athlete__name"})[0].get_text().strip()
                         response= req.get(url)

@@ -26,14 +26,19 @@
           Predictions
         </b-nav-item>
 
-        <b-nav-item href="#">
+        <b-nav-item href="/ufc/stats">
           <img class="drop-icon" src="@/assets/interactive-display.png" />
           Stat Leaders
         </b-nav-item>
 
-        <b-nav-item href="#">
-          <img class="drop-icon" src="@/assets/settings.png" />
-        Settings
+         <b-nav-item href="#">
+          <img class="drop-icon" src="@/assets/register.png" />
+          Register Fighter 
+        </b-nav-item>
+
+        <b-nav-item href="/ufc/ontology/details">
+          <img class="drop-icon" src="@/assets/information.png" />
+        Ontology Details 
         </b-nav-item>
       </b-navbar-nav>
     </b-collapse>
