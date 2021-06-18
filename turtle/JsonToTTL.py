@@ -364,7 +364,7 @@ with open('../web-scraping/JSON/ufc.json') as ufcJson :
 :{id} rdf:type owl:NamedIndividual ,
                 :Referee ;
             :Name "{name}"^^xsd:string .\n
-    """.format(id=r["Name"].replace(' ','_').lower(),name=r["Name"])
+    """.format(id=r["Name"].replace('-','_').replace(' ','_').lower(),name=r["Name"])
             ufcttl.write(referee)
 
 
@@ -399,7 +399,7 @@ with open('../web-scraping/JSON/ufc.json') as ufcJson :
                  :TDAcc "{tdacc}"^^xsd:string ;
                  :TDAvg "{tdavg}"^^xsd:string ;
                  :TDDef "{tddef}"^^xsd:string .
-    """.format(id=f["Name"].replace(' ','_').replace('\'','_').replace('.','').lower(),name=f["Name"],nickname=f["Nickname"],dob=f["DateOfBirth"],
+    """.format(id=f["Name"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower(),name=f["Name"],nickname=f["Nickname"],dob=f["DateOfBirth"],
     height=f["Height"],weight=f["Weight"],reach=f["Reach"],stance=f["Stance"],belt=f["Belt"],wins=f["Wins"],
     draws=f["Draws"],losses=f["Losses"],sapm=f["SApM"],slpm=f["SLpM"],stracc=f["StrAcc"],strdef=f["StrDef"],
     subavg=f["SubAvg"],tdacc=f["TDAcc"],tdavg=f["TDAvg"],tddef=f["TDDef"])
@@ -470,21 +470,21 @@ with open('../web-scraping/JSON/ufc.json') as ufcJson :
             for f in e["Fights"]:
                 
                 if f["RedCornerResult"]=="W":
-                        red = ":waswonBy    :"+f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
-                        blue = ":waslostBy  :"+f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+                        red = ":waswonBy    :"+f["RedCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower()
+                        blue = ":waslostBy  :"+f["BlueCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower()
 
                 elif f["RedCornerResult"]=="L":
-                        red  = ":waslostBy  :"+f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
-                        blue = ":waswonBy   :"+f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+                        red  = ":waslostBy  :"+f["RedCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower()
+                        blue = ":waswonBy   :"+f["BlueCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower()
                 
                 elif f["RedCornerResult"]=="D":
-                        red  = ":wastiedBy  :"+f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
-                        blue = ":wastiedBy  :"+f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+                        red  = ":wastiedBy  :"+f["RedCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower()
+                        blue = ":wastiedBy  :"+f["BlueCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower()
 
 
                 else : 
-                        red  = ":hadNC    :"+f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
-                        blue = ":hadNC    :"+f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+                        red  = ":hadNC    :"+f["RedCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower()
+                        blue = ":hadNC    :"+f["BlueCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower()
 
 
                 eventsTTL+="""
@@ -547,8 +547,8 @@ with open('../web-scraping/JSON/ufc.json') as ufcJson :
     redcornersubatt=f["Stats"]["RedCorner"]["SubAtt"],
     redcornerreversal=f["Stats"]["RedCorner"]["Reversal"],
     redcornerctrl=f["Stats"]["RedCorner"]["CTRL"],
-    fighter1_id=f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower(),
-    fighter2_id=f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower(),
+    fighter1_id=f["BlueCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower(),
+    fighter2_id=f["RedCorner"].replace('-','_').replace(' ','_').replace('\'','_').replace('.','').lower(),
     r=red,
     b=blue
     )

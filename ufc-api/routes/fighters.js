@@ -29,7 +29,8 @@ router.get('/', async function (req, res) {
            :TDAvg ?tdavg;
            :TDDef ?tddef .
     }
-    order by (?name)`
+    order by ?name
+`
 
     var result = await gdb.execQuery(query);
 
