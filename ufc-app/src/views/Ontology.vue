@@ -13,6 +13,9 @@
 <script>
 import axios from "axios";
 export default {
+  metaInfo:{
+      title:'Ontology Details'
+    },
   name: "Ontology",
   data() {
     return {

@@ -96,6 +96,10 @@
 import axios from "axios";
 
 export default {
+  metaInfo:{
+      title:'UFC EVENT'
+    },
+  
   name: "Event",
   props: ["idr","details"],
 

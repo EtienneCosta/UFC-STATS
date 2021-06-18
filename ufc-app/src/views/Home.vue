@@ -10,6 +10,9 @@ import Background from "@/components/Background.vue";
 
 
 export default {
+   metaInfo:{
+      title:'UFC STATS'
+    },
   name: "Home",
   components: {
     Background

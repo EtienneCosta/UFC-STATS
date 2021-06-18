@@ -220,6 +220,12 @@
 import axios from "axios";
 
 export default {
+
+   metaInfo:{
+      title:'UFC Fighter'
+    },
+
+
   name: "Fighter",
 
   created() {

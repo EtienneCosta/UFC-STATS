@@ -7,6 +7,11 @@
 import axios from 'axios';
 import ConsultEvent from "../components/ConsultEvent.vue"
 export default {
+
+   metaInfo:{
+      title:'UFC Event'
+    },
+
     components: {
         ConsultEvent
     },

@@ -107,6 +107,10 @@
 
 import axios from 'axios'
 export default {
+     metaInfo:{
+      title:'UFC Predictions'
+    },
+
     data: function(){
         return{
         loader: null,

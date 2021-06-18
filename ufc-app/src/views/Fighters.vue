@@ -77,6 +77,10 @@
 <script>
 import axios from "axios";
 export default {
+   metaInfo:{
+      title:'UFC Fighters'
+    },
+
   name: "Fighters",
   data() {
     return {

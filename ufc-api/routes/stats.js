@@ -8,7 +8,7 @@ var gdb = require('../utils/graphdb');
 /* ===========================CAREER STATS ================================ */
 
 /* Top 10 - Total Fights in UFC . */
-router.get('career/ufc-fights', async function (req, res, next) {
+router.get('/career/ufc-fights', async function (req, res, next) {
     var query = `
     select ?s ?name (count (?s) as ?totalfights) where { 
         ?s ?p :Fighter;
@@ -31,7 +31,7 @@ router.get('career/ufc-fights', async function (req, res, next) {
 });
 
 /* Top 10 - Total Fights in MMA . */
-router.get('career/mma-fights', async function (req, res, next) {
+router.get('/career/mma-fights', async function (req, res, next) {
     var query = `
     select ?s ?name ( (?wins+?losses+?draws) as ?totalFights) where {
         ?s a :Fighter;
@@ -57,12 +57,8 @@ router.get('career/mma-fights', async function (req, res, next) {
 
 
 
-
-
-
-
 /* Top 10 - Wins . */
-router.get('career/wins', async function (req, res, next) {
+router.get('/career/wins', async function (req, res, next) {
     var query = `
     select ?s ?name (Count (?fights) as ?wins ) where {
         ?s a :Fighter;
@@ -87,7 +83,7 @@ limit 10
 
 
 /* Title Fight Wins . */
-router.get('career/title-fight-wins', async function (req, res, next) {
+router.get('/career/title-fight-wins', async function (req, res, next) {
     var query = `
 select ?s ?name (Count (?fight) as ?wins ) where {
         ?s a :Fighter;
@@ -116,7 +112,7 @@ limit 10
 
 
 /* KO/TKO Wins . */
-router.get('career/KO-TKO', async function (req, res, next) {
+router.get('/career/KO-TKO', async function (req, res, next) {
     var query = `
 select ?s ?name (Count (?fight) as ?wins ) where {
         ?s a :Fighter;
@@ -144,7 +140,7 @@ limit 10
 
 
 /* Submission Wins . */
-router.get('career/submission-wins', async function (req, res, next) {
+router.get('/career/submission-wins', async function (req, res, next) {
     var query = `
 select ?s ?name (Count (?fight) as ?wins ) where {
         ?s a :Fighter;
@@ -171,7 +167,7 @@ limit 10
 });
 
 /* Finishes  */
-router.get('career/finishes', async function (req, res, next) {
+router.get('/career/finishes', async function (req, res, next) {
     var query = `
 select ?s ?name (Count (?fight) as ?wins ) where {
         ?s a :Fighter;
@@ -201,7 +197,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Decision  */
-router.get('career/decision', async function (req, res, next) {
+router.get('/career/decision', async function (req, res, next) {
     var query = `
 select ?s ?name (Count (?fight) as ?wins ) where {
         ?s a :Fighter;
@@ -228,7 +224,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Strike Accuracy  */
-router.get('career/strike-accuracy', async function (req, res, next) {
+router.get('/career/strike-accuracy', async function (req, res, next) {
     var query = `
 select distinct ?s ?name (xsd:double(?stracc) as ?strikes) where {
         ?s a :Fighter;
@@ -253,7 +249,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Strikes Landed Per Min  */
-router.get('career/strikes-landed-per-min', async function (req, res, next) {
+router.get('/career/strikes-landed-per-min', async function (req, res, next) {
     var query = `
 select distinct ?s ?name (xsd:double(?slpm) as ?strikes) where {
         ?s a :Fighter;
@@ -278,7 +274,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Strike Defense  */
-router.get('career/strike-defense', async function (req, res, next) {
+router.get('/career/strike-defense', async function (req, res, next) {
     var query = `
 select distinct ?s ?name (xsd:double(?strdef) as ?strikes) where {
         ?s a :Fighter;
@@ -302,7 +298,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* TakeDown Accuracy  */
-router.get('career/takedown-accuracy', async function (req, res, next) {
+router.get('/career/takedown-accuracy', async function (req, res, next) {
     var query = `
 select distinct ?s ?name (xsd:double(?tdacc) as ?takedowns) where {
         ?s a :Fighter;
@@ -328,7 +324,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* TakeDown Defense  */
-router.get('career/takedown-defense', async function (req, res, next) {
+router.get('/career/takedown-defense', async function (req, res, next) {
     var query = `
 select distinct ?s ?name (xsd:double(?tddef) as ?takedowns) where {
         ?s a :Fighter;
@@ -354,7 +350,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Submission Average  */
-router.get('career/submission-average', async function (req, res, next) {
+router.get('/career/submission-average', async function (req, res, next) {
     var query = `
 select distinct ?s ?name (xsd:double(?subavg) as ?submission) where {
         ?s a :Fighter;
@@ -386,7 +382,7 @@ result = result.results.bindings.map(bind => {
 /* =========================== FIGHT STATS ================================ */
 
 /* Fastest Finish  */
-router.get('fight/fastest-finish', async function (req, res, next) {
+router.get('/fight/fastest-finish', async function (req, res, next) {
     var query = `
 select  ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
@@ -421,7 +417,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Fastest KO/TKO  */
-router.get('fight/fastest-ko/tko', async function (req, res, next) {
+router.get('/fight/fastest-ko/tko', async function (req, res, next) {
     var query = `
 select  ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
@@ -458,7 +454,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Fastest Submission  */
-router.get('fight/fastest-submission', async function (req, res, next) {
+router.get('/fight/fastest-submission', async function (req, res, next) {
     var query = `
 select  ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
@@ -493,7 +489,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Latest Finish  */
-router.get('fight/latest-finish', async function (req, res, next) {
+router.get('/fight/latest-finish', async function (req, res, next) {
     var query = `
 select  ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
@@ -531,7 +527,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Latest KO/TKO  */
-router.get('fight/latest-ko-tko', async function (req, res, next) {
+router.get('/fight/latest-ko-tko', async function (req, res, next) {
     var query = `
 select  ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
@@ -567,7 +563,7 @@ result = result.results.bindings.map(bind => {
 });
 
 /* Latest Submission  */
-router.get('fight/latest-submission', async function (req, res, next) {
+router.get('/fight/latest-submission', async function (req, res, next) {
     var query = `
 select  ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
@@ -603,7 +599,7 @@ result = result.results.bindings.map(bind => {
 
 
 /* Knockdowns Landed  */
-router.get('fight/knockdows-landed', async function (req, res, next) {
+router.get('/fight/knockdows-landed', async function (req, res, next) {
     var query = `
 select ?s ?blue ?red ?time ?date ?name ( xsd:int(?bluekd)+xsd:int(?redkd) as ?knockdowns)  where {
         ?s a :Fight;
@@ -646,7 +642,7 @@ result = result.results.bindings.map(bind => {
 
 /* KO/TKO Wins */
 
-router.get('event/ko-tko', async function (req, res, next) {
+router.get('/event/ko-tko', async function (req, res, next) {
     var query = `
 select ?event ?name  ?date   (count (?s) as ?fights)  where {
         ?s a :Fight;
@@ -679,7 +675,7 @@ result = result.results.bindings.map(bind => {
 
 /* Submission Wins */
 
-router.get('event/submission-wins', async function (req, res, next) {
+router.get('/event/submission-wins', async function (req, res, next) {
     var query = `
 select ?event ?name  ?date   (count (?s) as ?fights)  where {
         ?s a :Fight;
@@ -711,7 +707,7 @@ result = result.results.bindings.map(bind => {
 
 /* Decision Wins */
 
-router.get('event/decision-wins', async function (req, res, next) {
+router.get('/event/decision-wins', async function (req, res, next) {
     var query = `
 select ?event ?name  ?date   (count (?s) as ?fights)  where {
         ?s a :Fight;
@@ -748,7 +744,7 @@ result = result.results.bindings.map(bind => {
 
 /* Countries,Cities and States with most events  */
 
-router.get('location/', async function (req, res, next) {
+router.get('/location/', async function (req, res, next) {
     var query = `
 select   ?country ?city ?state (count(?s) as ?events) where {
 
@@ -784,7 +780,7 @@ result = result.results.bindings.map(bind => {
 /* =========================  Referee STATS  ================= */
 
 /* Referee with most fights  */
-router.get('referee/', async function (req, res, next) {
+router.get('/referee/', async function (req, res, next) {
     var query = `
     select ?name (count (?fight) as ?fights) where {
         ?s a :Referee;

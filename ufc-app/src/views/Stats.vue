@@ -10,9 +10,9 @@
     <b-tab title="Career" active>
       <div class="results-content" >
         
-        <article id="TotalFights-group" class="results-group Fights-group">
+        <article  class="results-group Fights-group">
           <header>
-            <h3>Total Fights</h3>
+            <h3>UFC Total Fights</h3>
             <p></p>
           </header>
 
@@ -36,160 +36,25 @@
             </div>
 
             <!-- Resto dos lutadores -->
-            <div class="results-table--tr">
-              <span>1</span>
+            <div v-for="(c, index) in careers[0]" :key="index" class="results-table--tr">
+              <span>{{index}}</span>
               <span>
-                <a href="">Donald Cerrone</a>
+                <a href=""><u>{{c.Name}}</u></a>
               </span>
-              <span>37</span>
+              <span>{{c.TotalFights}}</span>
             </div>
 
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
           </div>
         </article>
 
 
 
-                <article id="TotalFights-group" class="results-group Fights-group">
-          <header>
-            <h3>Total Fights</h3>
-            <p></p>
-          </header>
-
-          <div class="results-table">
-            <div class="results-table--tr results-table--th">
-              <span>Rnk</span>
-              <span>Fighter</span>
-              <span>
-                <span>Total</span>
-              </span>
-            </div>
-
-          <!-- Primeiro lutador do ranking -->
-            <div class="results-table--tr results-table--row-1">
-                <span>1</span>
-                <span>
-                  <a href="">Jim Miller</a>
-                </span>
-                <span class="Ranking-one">37</span>
-                <img alt="Jim Miller Headshot" src="https://ufclivestorage.blob.core.windows.net/ufc-fighter-container/68254%2Fprofile-galery%2Fprofile-picture%2FMILLER_JIM_04-10.png" width="200" height="auto">
-            </div>
-
-            <!-- Resto dos lutadores -->
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-          </div>
-        </article>
 
 
 
-        <article id="TotalFights-group" class="results-group Fights-group">
-          <header>
-            <h3>Total Fights</h3>
-            <p></p>
-          </header>
 
-          <div class="results-table">
-            <div class="results-table--tr results-table--th">
-              <span>Rnk</span>
-              <span>Fighter</span>
-              <span>
-                <span>Total</span>
-              </span>
-            </div>
 
-          <!-- Primeiro lutador do ranking -->
-            <div class="results-table--tr results-table--row-1">
-                <span>1</span>
-                <span>
-                  <a href="">Jim Miller</a>
-                </span>
-                <span class="Ranking-one">37</span>
-                <img alt="Jim Miller Headshot" src="https://ufclivestorage.blob.core.windows.net/ufc-fighter-container/68254%2Fprofile-galery%2Fprofile-picture%2FMILLER_JIM_04-10.png" width="200" height="auto">
-            </div>
 
-            <!-- Resto dos lutadores -->
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-
-            <div class="results-table--tr">
-              <span>1</span>
-              <span>
-                <a href="">Donald Cerrone</a>
-              </span>
-              <span>37</span>
-            </div>
-          </div>
-        </article>
 
 
 
@@ -378,17 +243,127 @@
 
 
 
+        <article id="TotalFights-group" class="results-group Fights-group">
+          <header>
+            <h3>Total Fights</h3>
+            <p></p>
+          </header>
+
+          <div class="results-table">
+            <div class="results-table--tr results-table--th">
+              <span>Rnk</span>
+              <span>Fighter</span>
+              <span>
+                <span>Total</span>
+              </span>
+            </div>
+
+          <!-- Primeiro lutador do ranking -->
+            <div class="results-table--tr results-table--row-1">
+                <span>1</span>
+                <span>
+                  <a href="">Jim Miller</a>
+                </span>
+                <span class="Ranking-one">37</span>
+                <img alt="Jim Miller Headshot" src="https://ufclivestorage.blob.core.windows.net/ufc-fighter-container/68254%2Fprofile-galery%2Fprofile-picture%2FMILLER_JIM_04-10.png" width="200" height="auto">
+            </div>
+
+            <!-- Resto dos lutadores -->
+            <div class="results-table--tr">
+              <span>1</span>
+              <span>
+                <a href="">Donald Cerrone</a>
+              </span>
+              <span>37</span>
+            </div>
+
+            <div class="results-table--tr">
+              <span>1</span>
+              <span>
+                <a href="">Donald Cerrone</a>
+              </span>
+              <span>37</span>
+            </div>
+            <div class="results-table--tr">
+              <span>1</span>
+              <span>
+                <a href="">Donald Cerrone</a>
+              </span>
+              <span>37</span>
+            </div>
+
+            <div class="results-table--tr">
+              <span>1</span>
+              <span>
+                <a href="">Donald Cerrone</a>
+              </span>
+              <span>37</span>
+            </div>
+          </div>
+        </article>
 
 
 
+
+        <article id="TotalFights-group" class="results-group Fights-group">
+          <header>
+            <h3>Total Fights</h3>
+            <p></p>
+          </header>
+
+          <div class="results-table">
+            <div class="results-table--tr results-table--th">
+              <span>Rnk</span>
+              <span>Fighter</span>
+              <span>
+                <span>Total</span>
+              </span>
+            </div>
+
+          <!-- Primeiro lutador do ranking -->
+            <div class="results-table--tr results-table--row-1">
+                <span>1</span>
+                <span>
+                  <a href="">Jim Miller</a>
+                </span>
+                <span class="Ranking-one">37</span>
+                <img alt="Jim Miller Headshot" src="https://ufclivestorage.blob.core.windows.net/ufc-fighter-container/68254%2Fprofile-galery%2Fprofile-picture%2FMILLER_JIM_04-10.png" width="200" height="auto">
+            </div>
+
+            <!-- Resto dos lutadores -->
+            <div class="results-table--tr">
+              <span>1</span>
+              <span>
+                <a href="">Donald Cerrone</a>
+              </span>
+              <span>37</span>
+            </div>
+
+            <div class="results-table--tr">
+              <span>1</span>
+              <span>
+                <a href="">Donald Cerrone</a>
+              </span>
+              <span>37</span>
+            </div>
+            <div class="results-table--tr">
+              <span>1</span>
+              <span>
+                <a href="">Donald Cerrone</a>
+              </span>
+              <span>37</span>
+            </div>
+
+            <div class="results-table--tr">
+              <span>1</span>
+              <span>
+                <a href="">Donald Cerrone</a>
+              </span>
+              <span>37</span>
+            </div>
+          </div>
+        </article>
       </div>
-
-      
-      
-      
-      
-      
-      
       </b-tab>
     <b-tab title="Fight"><p>I'm the second tab</p></b-tab>
     <b-tab title="Event"><p>I'm the second tab</p></b-tab>
@@ -402,13 +377,55 @@
 </template>
 
 <script>
+import axios from 'axios'
+
   export default {
+     metaInfo:{
+      title:'UFC STATS'
+    },
     data () {
       return {
-        tabs: null,
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+
+        careers:[],
+        fights:[],
+        events:[],
+        locations:[],
+        referees:[]        
       }
     },
+
+  created() {
+    this.getCareerStats();
+  },
+
+  methods:{
+
+       getCareerStats: async function(){
+           axios.all([ 
+              axios.get('http://localhost:8079/ufc/stats/career/ufc-fights'),
+              axios.get('http://localhost:8079/ufc/stats/career/mma-fights'),
+              axios.get('http://localhost:8079/ufc/stats/career/wins'),
+              axios.get('http://localhost:8079/ufc/stats/career/title-fight-wins'),
+              axios.get('http://localhost:8079/ufc/stats/career/KO-TKO'),
+              axios.get('http://localhost:8079/ufc/stats/career/submission-wins'),
+              axios.get('http://localhost:8079/ufc/stats/career/finishes'),
+              axios.get('http://localhost:8079/ufc/stats/career/decision'),
+              axios.get('http://localhost:8079/ufc/stats/career/strike-accuracy'),
+              axios.get('http://localhost:8079/ufc/stats/career/strikes-landed-per-min'),
+              axios.get('http://localhost:8079/ufc/stats/career/strike-defense'),
+              axios.get('http://localhost:8079/ufc/stats/career/takedown-accuracy'),
+              axios.get('http://localhost:8079/ufc/stats/career/takedown-defense'),
+              axios.get('http://localhost:8079/ufc/stats/career/submission-average'),
+            ])
+              .then(axios.spread((...responses) => {
+                responses.forEach(r=>{
+                  this.careers.push(r.data)
+                })
+                  }))
+              .catch(e => console.log('Error requesting the career stats :: '+ e))
+           
+          }          
+      }
   }
 </script>
 
