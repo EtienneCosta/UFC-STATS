@@ -1,7 +1,7 @@
 #!usr/bin/python3
 
 import json
-with open('../Data/ufc.json') as ufcJson : 
+with open('../web-scraping/JSON/ufc.json') as ufcJson : 
     data = json.load(ufcJson)
 
     referees = data['Referees']
@@ -31,17 +31,38 @@ with open('../Data/ufc.json') as ufcJson :
 #    Object Properties
 #################################################################
 
+
+###  http://www.di.uminho.pt/prc2021/ufc#won
+:won rdf:type owl:ObjectProperty ;
+              owl:inverseOf :waswonBy ;
+              rdfs:domain :Fighter ;
+              rdfs:range :Fight .
+
+
+###  http://www.di.uminho.pt/prc2021/ufc#lost
+:lost rdf:type owl:ObjectProperty ;
+              owl:inverseOf :waslostBy ;
+              rdfs:domain :Fighter ;
+              rdfs:range :Fight .
+
+###  http://www.di.uminho.pt/prc2021/ufc#tied
+:tied rdf:type owl:ObjectProperty ;
+              owl:inverseOf :wastiedBy ;
+              rdfs:domain :Fighter ;
+              rdfs:range :Fight .
+
+###  http://www.di.uminho.pt/prc2021/ufc#nc
+:nc rdf:type owl:ObjectProperty ;
+              owl:inverseOf :hadNC ;
+              rdfs:domain :Fighter ;
+              rdfs:range :Fight .
+
+
 ###  http://www.di.uminho.pt/prc2021/ufc#arbitrated
 :arbitrated rdf:type owl:ObjectProperty ;
             owl:inverseOf :wasarbitratedBy ;
             rdfs:domain :Referee ;
             rdfs:range :Fight .
-
-
-###  http://www.di.uminho.pt/prc2021/ufc#belong
-:belong rdf:type owl:ObjectProperty ;
-        owl:inverseOf :hadA .
-
 
 ###  http://www.di.uminho.pt/prc2021/ufc#hadA
 :hadA rdf:type owl:ObjectProperty ;
@@ -56,15 +77,20 @@ with open('../Data/ufc.json') as ufcJson :
         rdfs:range :Event .
 
 
-###  http://www.di.uminho.pt/prc2021/ufc#occurred
-:occurred rdf:type owl:ObjectProperty .
-
-
 ###  http://www.di.uminho.pt/prc2021/ufc#participated
 :participated rdf:type owl:ObjectProperty ;
               owl:inverseOf :wasmadeBy ;
               rdfs:domain :Fighter ;
               rdfs:range :Fight .
+
+
+###  http://www.di.uminho.pt/prc2021/ufc#belong
+:belong rdf:type owl:ObjectProperty ;
+        owl:inverseOf :hadA .
+
+
+###  http://www.di.uminho.pt/prc2021/ufc#occurred
+:occurred rdf:type owl:ObjectProperty .
 
 
 ###  http://www.di.uminho.pt/prc2021/ufc#wasarbitratedBy
@@ -73,6 +99,19 @@ with open('../Data/ufc.json') as ufcJson :
 
 ###  http://www.di.uminho.pt/prc2021/ufc#wasmadeBy
 :wasmadeBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.di.uminho.pt/prc2021/ufc#waswonBy
+:waswonBy rdf:type owl:ObjectProperty .
+
+###  http://www.di.uminho.pt/prc2021/ufc#waslostBy
+:waslostBy rdf:type owl:ObjectProperty .
+
+###  http://www.di.uminho.pt/prc2021/ufc#wastiedBy
+:wastiedBy rdf:type owl:ObjectProperty .
+
+###  http://www.di.uminho.pt/prc2021/ufc#hadNC
+:hadNC rdf:type owl:ObjectProperty .
 
 
 #################################################################
@@ -429,6 +468,25 @@ with open('../Data/ufc.json') as ufcJson :
     """.format(id=e["Name"].replace('\'','').replace('!','').lower(),location=[key for key,value in locations.items() if value==e["Location"]][0],date=e["Date"],name=e["Name"].replace('_',' '))
 
             for f in e["Fights"]:
+                
+                if f["RedCornerResult"]=="W":
+                        red = ":waswonBy    :"+f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+                        blue = ":waslostBy  :"+f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+
+                elif f["RedCornerResult"]=="L":
+                        red  = ":waslostBy  :"+f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+                        blue = ":waswonBy   :"+f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+                
+                elif f["RedCornerResult"]=="D":
+                        red  = ":wastiedBy  :"+f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+                        blue = ":wastiedBy  :"+f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+
+
+                else : 
+                        red  = ":hadNC    :"+f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+                        blue = ":hadNC    :"+f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
+
+
                 eventsTTL+="""
 ###  http://www.di.uminho.pt/prc2021/ufc#{id}
 :{id} rdf:type owl:NamedIndividual ,
@@ -437,6 +495,8 @@ with open('../Data/ufc.json') as ufcJson :
                                    :wasarbitratedBy :{referee} ;
                                    :wasmadeBy :{fighter1_id} ,
                                               :{fighter2_id} ;
+                                   {r};
+                                   {b}; 
                                    :Bout "{bout}"^^xsd:string ;
                                    :Method "{method}"^^xsd:string ;
                                    :Round "{round}"^^xsd:string ;
@@ -488,8 +548,9 @@ with open('../Data/ufc.json') as ufcJson :
     redcornerreversal=f["Stats"]["RedCorner"]["Reversal"],
     redcornerctrl=f["Stats"]["RedCorner"]["CTRL"],
     fighter1_id=f["BlueCorner"].replace(' ','_').replace('\'','_').replace('.','').lower(),
-    fighter2_id=f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower()
-
+    fighter2_id=f["RedCorner"].replace(' ','_').replace('\'','_').replace('.','').lower(),
+    r=red,
+    b=blue
     )
 
             ufcttl.write(eventsTTL)
