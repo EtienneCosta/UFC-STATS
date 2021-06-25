@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>
       <div>
         <br />
         <h1>{{ this.fighter.name }}</h1>
@@ -10,19 +9,19 @@
             this.fighter.draws
           }}
         </h5>
+        <br/>
 
-        <br />
+        <b-card-group 
+          style="width: 75%; heigth: 50%; margin: auto;"
+        deck>
 
-        <b-card-group
-          deck
-          style="width: 75%; heigth: 50%; margin: auto; margin-right: 50px"
-        >
-          <b-card
-            style="width:75% heigth:450px margin-right:50px "
+
+             <b-card
+            style="width:75% heigth:450px margin-right:50px;"
             header-tag="header"
           >
             <template #header>
-              <h6 class="mb-0"><b>Fighter Details</b></h6>
+              <h6 ><b>Fighter Details</b></h6>
             </template>
             <b-card-text>
               <ul>
@@ -47,60 +46,54 @@
               </ul></b-card-text
             >
           </b-card>
-          <b-card
-            style="width: 75%; heigth: 50%; margin-right: 50px"
+
+        <b-card
+            style="width: 75%; heigth: 50%; margin-right: 50px;"
             header-tag="header"
           >
             <template #header>
               <h6 class="mb-0"><b>Career Statistics</b></h6>
             </template>
             <b-card-text>
-              <div class="wrapper">
-                <div id="left-block">
+
                   <ul>
                     <li><b>SLpM:</b> {{ this.fighter.slpm }}</li>
                     <li><b>Str. Acc:</b> {{ this.fighter.stracc }}%</li>
                     <li><b>SApM:</b> {{ this.fighter.sapm }}</li>
                     <li><b>Str. Def:</b> {{ this.fighter.strdef }}%</li>
-                  </ul>
-                </div>
-
-                <div id="right-block">
-                  <ul>
                     <li><b>TD Avg:</b> {{ this.fighter.tdavg }}</li>
                     <li><b>TD Acc:</b> {{ this.fighter.tdacc }}%</li>
                     <li><b>TD Def:</b> {{ this.fighter.tddef }}%</li>
                     <li><b>Sub. Avg:</b> {{ this.fighter.subavg }}</li>
                   </ul>
-                </div>
-              </div>
+
             </b-card-text>
           </b-card>
 
-          <b-card
-            style="width: 75%; heigth: 50%; margin-right: 50px"
+
+
+           <b-card
             header-tag="header"
-            grid-list-md
+            style="width: 95%; heigth: 50%;"
+
           >
             <template #header>
-              <h6 class="mb-0"><b>Help Guide</b></h6>
+              <h6><b>Help Guide</b></h6>
             </template>
-            <b-card-text>
+            <b-card-text style="font-size:15px;">
               <ul>
                 <li><b>SLpM</b> - Significant Strikes Landed per Minute</li>
                 <li><b>Str. Acc.</b> - Significant Striking Accuracy</li>
                 <li><b>SApM</b> - Significant Strikes Absorbed per Minute</li>
                 <li>
-                  <b>Str. Def.</b> - Significant Strike Defence (the % of
-                  opponents strikes that did not land)
+                  <b>Str. Def.</b> - Significant Strike Defence 
                 </li>
                 <li>
                   <b>TD Avg.</b> - Average Takedowns Landed per 15 minutes
                 </li>
                 <li><b>TD Acc.</b> - Takedown Accuracy</li>
                 <li>
-                  <b>TD Def.</b> - Takedown Defense (the % of opponents TD
-                  attempts that did not land)
+                  <b>TD Def.</b> - Takedown Defense 
                 </li>
                 <li>
                   <b>Sub. Avg.</b> - Average Submissions Attempted per 15
@@ -115,8 +108,9 @@
             @error="imgError"
             style="width: auto; height: auto"
           />
-        </b-card-group>
-      </div>
+
+  </b-card-group>
+
     </div>
 
     <div>

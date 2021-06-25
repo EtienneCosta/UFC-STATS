@@ -6,8 +6,13 @@ import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
+  { 
+    path: '/', 
+    redirect: { name: 'Home' }
+  }
+  ,
   {
-    path: '/',
+    path: '/ufc',
     name: 'Home',
     component: Home,
   },
@@ -56,6 +61,16 @@ const routes = [
    },
 
    {
+    path: '/ufc/predictions/history',
+     name: 'PredictionsHistory',
+     // route level code-splitting
+     // this generates a separate chunk (about.[hash].js) for this route
+     // which is lazy-loaded when the route is visited.
+     component: () => import(/* webpackChunkName: "about" */ '../views/PredictionsHistory.vue')
+   },
+
+  
+   {
     path: '/ufc/ontology/details',
      name: 'Ontology',
      // route level code-splitting
@@ -70,7 +85,25 @@ const routes = [
      // this generates a separate chunk (about.[hash].js) for this route
      // which is lazy-loaded when the route is visited.
      component: () => import(/* webpackChunkName: "about" */ '../views/Stats.vue')
-   }
+   },
+
+   {
+    path: '/ufc/rate-us',
+     name: 'Rate',
+     // route level code-splitting
+     // this generates a separate chunk (about.[hash].js) for this route
+     // which is lazy-loaded when the route is visited.
+     component: () => import(/* webpackChunkName: "about" */ '../views/RateUs.vue')
+   },
+
+   {
+    path: '/ufc/reviews',
+     name: 'Review',
+     // route level code-splitting
+     // this generates a separate chunk (about.[hash].js) for this route
+     // which is lazy-loaded when the route is visited.
+     component: () => import(/* webpackChunkName: "about" */ '../views/Reviews.vue')
+   },
 ]
 
 // {

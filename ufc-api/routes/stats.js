@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 var gdb = require('../utils/graphdb');
+var conversor = require('../utils/data');
+
 
 
 
@@ -74,7 +76,7 @@ limit 10
         return{
             ID: bind.s.value.split('#')[1],
             Name:bind.name.value,
-            Wins:bind.wins.value
+            TotalFights:bind.wins.value
         }
       });
       res.status(200).jsonp(result);
@@ -103,7 +105,7 @@ limit 10
         return{
             ID: bind.s.value.split('#')[1],
             Name:bind.name.value,
-            Wins:bind.wins.value
+            TotalFights:bind.wins.value
         }
       });
       res.status(200).jsonp(result);
@@ -132,7 +134,7 @@ limit 10
         return{
             ID: bind.s.value.split('#')[1],
             Name:bind.name.value,
-            Wins:bind.wins.value
+            TotalFights:bind.wins.value
         }
       });
       res.status(200).jsonp(result);
@@ -160,7 +162,7 @@ limit 10
         return{
             ID: bind.s.value.split('#')[1],
             Name:bind.name.value,
-            Wins:bind.wins.value
+            TotalFights:bind.wins.value
         }
       });
       res.status(200).jsonp(result);
@@ -175,7 +177,7 @@ select ?s ?name (Count (?fight) as ?wins ) where {
            :won ?fight.
     ?fight :Method ?method.
     
-    FILTER REGEX (?method,"submission| KO/TKO","i") 
+    FILTER (REGEX (?method,"KO/TKO","i") ||  REGEX (?method,"submission","i"))
     }     
     
     group by ?s ?name
@@ -187,7 +189,7 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.s.value.split('#')[1],
         Name:bind.name.value,
-        Wins:bind.wins.value
+        TotalFights:bind.wins.value
     }
   });
   res.status(200).jsonp(result);
@@ -216,7 +218,7 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.s.value.split('#')[1],
         Name:bind.name.value,
-        Wins:bind.wins.value
+        TotalFights:bind.wins.value
     }
   });
   res.status(200).jsonp(result);
@@ -241,7 +243,7 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.s.value.split('#')[1],
         Name:bind.name.value,
-        Strikes:bind.strikes.value
+        TotalFights:bind.strikes.value
     }
   });
   res.status(200).jsonp(result);
@@ -266,7 +268,7 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.s.value.split('#')[1],
         Name:bind.name.value,
-        Strikes:bind.strikes.value
+        TotalFights:bind.strikes.value
     }
   });
   res.status(200).jsonp(result);
@@ -290,7 +292,7 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.s.value.split('#')[1],
         Name:bind.name.value,
-        Strikes:bind.strikes.value
+        TotalFights:bind.strikes.value
     }
   });
   res.status(200).jsonp(result);
@@ -315,7 +317,7 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.s.value.split('#')[1],
         Name:bind.name.value,
-        TakeDowns:bind.takedowns.value
+        TotalFights:bind.takedowns.value
     }
   });
   res.status(200).jsonp(result);
@@ -342,7 +344,7 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.s.value.split('#')[1],
         Name:bind.name.value,
-        TakeDowns:bind.takedowns.value
+        TotalFights:bind.takedowns.value
     }
   });
   res.status(200).jsonp(result);
@@ -367,7 +369,7 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.s.value.split('#')[1],
         Name:bind.name.value,
-        Submission:bind.submission.value
+        TotalFights:bind.submission.value
     }
   });
   res.status(200).jsonp(result);
@@ -384,7 +386,7 @@ result = result.results.bindings.map(bind => {
 /* Fastest Finish  */
 router.get('/fight/fastest-finish', async function (req, res, next) {
     var query = `
-select  ?blue ?red ?time ?date ?name  where {
+select  ?event ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
            :Method ?method;
            :BlueCorner ?blue;
@@ -395,7 +397,7 @@ select  ?blue ?red ?time ?date ?name  where {
    	    ?event :Date   ?date;
          	   :Name   ?name .
     
-    FILTER REGEX (?method,"KO/TKO|Submission","i")
+    FILTER (REGEX (?method,"KO/TKO","i") || REGEX (?method,"Submission","i") )
 }     
 
 order by asc (?round) (?time)
@@ -404,10 +406,11 @@ limit 10
 var result = await gdb.execQuery(query);
 result = result.results.bindings.map(bind => {
     return{
+        ID: bind.event.value.split('#')[1],
         Red: bind.red.value,
         Blue: bind.blue.value,
         Name: bind.name.value,
-        Date: bind.date.value,
+        Date: conversor.conversorData(bind.date.value),
         Time: bind.time.value
     }
   });
@@ -417,9 +420,9 @@ result = result.results.bindings.map(bind => {
 
 
 /* Fastest KO/TKO  */
-router.get('/fight/fastest-ko/tko', async function (req, res, next) {
+router.get('/fight/fastest-KO-TKO', async function (req, res, next) {
     var query = `
-select  ?blue ?red ?time ?date ?name  where {
+select ?event ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
            :Method ?method;
            :BlueCorner ?blue;
@@ -440,10 +443,11 @@ limit 10
 var result = await gdb.execQuery(query);
 result = result.results.bindings.map(bind => {
     return{
+        ID: bind.event.value.split('#')[1],
         Red: bind.red.value,
         Blue: bind.blue.value,
         Name: bind.name.value,
-        Date: bind.date.value,
+        Date: conversor.conversorData(bind.date.value),
         Time: bind.time.value
     }
   });
@@ -456,7 +460,7 @@ result = result.results.bindings.map(bind => {
 /* Fastest Submission  */
 router.get('/fight/fastest-submission', async function (req, res, next) {
     var query = `
-select  ?blue ?red ?time ?date ?name  where {
+select ?event ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
            :Method ?method;
            :BlueCorner ?blue;
@@ -476,10 +480,11 @@ select  ?blue ?red ?time ?date ?name  where {
 var result = await gdb.execQuery(query);
 result = result.results.bindings.map(bind => {
     return{
+        ID: bind.event.value.split('#')[1],
         Red: bind.red.value,
         Blue: bind.blue.value,
         Name: bind.name.value,
-        Date: bind.date.value,
+        Date: conversor.conversorData(bind.date.value),
         Time: bind.time.value
     }
   });
@@ -491,7 +496,7 @@ result = result.results.bindings.map(bind => {
 /* Latest Finish  */
 router.get('/fight/latest-finish', async function (req, res, next) {
     var query = `
-select  ?blue ?red ?time ?date ?name  where {
+select ?event ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
            :Method ?method;
            :BlueCorner ?blue;
@@ -502,7 +507,7 @@ select  ?blue ?red ?time ?date ?name  where {
    	    ?event :Date   ?date;
          	   :Name   ?name .
     
-    FILTER REGEX (?method,"KO/TKO|Submission","i")
+    FILTER (REGEX (?method,"KO/TKO","i") || REGEX (?method,"Submission","i") )
     FILTER  (?round="5")
 
 }     
@@ -514,10 +519,11 @@ limit 10
 var result = await gdb.execQuery(query);
 result = result.results.bindings.map(bind => {
     return{
+        ID:bind.event.value.split('#')[1],
         Red: bind.red.value,
         Blue: bind.blue.value,
         Name: bind.name.value,
-        Date: bind.date.value,
+        Date: conversor.conversorData(bind.date.value),
         Time: bind.time.value
     }
   });
@@ -527,9 +533,9 @@ result = result.results.bindings.map(bind => {
 
 
 /* Latest KO/TKO  */
-router.get('/fight/latest-ko-tko', async function (req, res, next) {
+router.get('/fight/latest-KO-TKO', async function (req, res, next) {
     var query = `
-select  ?blue ?red ?time ?date ?name  where {
+select ?event  ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
            :Method ?method;
            :BlueCorner ?blue;
@@ -552,10 +558,11 @@ limit 10
 var result = await gdb.execQuery(query);
 result = result.results.bindings.map(bind => {
     return{
+        ID:bind.event.value.split('#')[1],
         Red: bind.red.value,
         Blue: bind.blue.value,
         Name: bind.name.value,
-        Date: bind.date.value,
+        Date: conversor.conversorData(bind.date.value),
         Time: bind.time.value
     }
   });
@@ -565,7 +572,7 @@ result = result.results.bindings.map(bind => {
 /* Latest Submission  */
 router.get('/fight/latest-submission', async function (req, res, next) {
     var query = `
-select  ?blue ?red ?time ?date ?name  where {
+select ?event ?blue ?red ?time ?date ?name  where {
         ?s a :Fight;
            :Method ?method;
            :BlueCorner ?blue;
@@ -587,10 +594,11 @@ limit 10
 var result = await gdb.execQuery(query);
 result = result.results.bindings.map(bind => {
     return{
+        ID:bind.event.value.split('#')[1],
         Red: bind.red.value,
         Blue: bind.blue.value,
         Name: bind.name.value,
-        Date: bind.date.value,
+        Date: conversor.conversorData(bind.date.value),
         Time: bind.time.value
     }
   });
@@ -601,7 +609,7 @@ result = result.results.bindings.map(bind => {
 /* Knockdowns Landed  */
 router.get('/fight/knockdows-landed', async function (req, res, next) {
     var query = `
-select ?s ?blue ?red ?time ?date ?name ( xsd:int(?bluekd)+xsd:int(?redkd) as ?knockdowns)  where {
+select ?event ?s ?blue ?red ?time ?date ?name ( xsd:int(?bluekd)+xsd:int(?redkd) as ?knockdowns)  where {
         ?s a :Fight;
            :Method ?method;
            :BlueCorner ?blue;
@@ -622,10 +630,11 @@ limit 10
 var result = await gdb.execQuery(query);
 result = result.results.bindings.map(bind => {
     return{
+        ID:bind.event.value.split('#')[1],
         Red: bind.red.value,
         Blue: bind.blue.value,
         Name: bind.name.value,
-        Date: bind.date.value,
+        Date: conversor.conversorData(bind.date.value),
         Time: bind.time.value,
         Knockdows : bind.knockdowns.value
     }
@@ -642,7 +651,7 @@ result = result.results.bindings.map(bind => {
 
 /* KO/TKO Wins */
 
-router.get('/event/ko-tko', async function (req, res, next) {
+router.get('/event/KO-TKO', async function (req, res, next) {
     var query = `
 select ?event ?name  ?date   (count (?s) as ?fights)  where {
         ?s a :Fight;
@@ -664,8 +673,8 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.event.value.split('#')[1],
         Name: bind.name.value,
-        Date: bind.date.value,
-        Knockdows: bind.fights.value,
+        Date: conversor.conversorData(bind.date.value),
+        Fights: bind.fights.value,
     }
   });
   res.status(200).jsonp(result);
@@ -697,8 +706,8 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.event.value.split('#')[1],
         Name: bind.name.value,
-        Date: bind.date.value,
-        Submissions: bind.fights.value,
+        Date: conversor.conversorData(bind.date.value),
+        Fights: bind.fights.value,
     }
   });
   res.status(200).jsonp(result);
@@ -730,8 +739,8 @@ result = result.results.bindings.map(bind => {
     return{
         ID: bind.event.value.split('#')[1],
         Name: bind.name.value,
-        Date: bind.date.value,
-        Decision: bind.fights.value,
+        Date: conversor.conversorData(bind.date.value),
+        Fights: bind.fights.value,
     }
   });
   res.status(200).jsonp(result);
@@ -744,7 +753,7 @@ result = result.results.bindings.map(bind => {
 
 /* Countries,Cities and States with most events  */
 
-router.get('/location/', async function (req, res, next) {
+router.get('/location', async function (req, res, next) {
     var query = `
 select   ?country ?city ?state (count(?s) as ?events) where {
 
@@ -780,7 +789,7 @@ result = result.results.bindings.map(bind => {
 /* =========================  Referee STATS  ================= */
 
 /* Referee with most fights  */
-router.get('/referee/', async function (req, res, next) {
+router.get('/referee', async function (req, res, next) {
     var query = `
     select ?name (count (?fight) as ?fights) where {
         ?s a :Referee;
@@ -796,6 +805,45 @@ result = result.results.bindings.map(bind => {
     return{
         Name: bind.name.value,
         Fights: bind.fights.value
+    }
+  });
+  res.status(200).jsonp(result);
+});
+
+/* =========================================================== */
+
+
+/* =========================  Referee STATS  ================= */
+
+/* Referee with most fights  */
+router.get('/titleholders', async function (req, res, next) {
+    var query = `
+    select * where {
+        ?s a :Fighter;
+           :Name ?name;
+           :Nickname ?nickname;
+           :Wins ?wins;
+           :Losses ?losses;
+           :Draws ?draws;
+           :Belt  ?belt;
+           :Weight ?weight.
+
+        filter (?belt = true)
+    }
+
+    order by ?weight
+`
+var result = await gdb.execQuery(query);
+result = result.results.bindings.map(bind => {
+    return{
+        ID: bind.s.value.split('#')[1],
+        Name: bind.name.value,
+        Nickname: bind.nickname.value,
+        Wins: bind.wins.value,
+        Losses: bind.losses.value,
+        Draws: bind.draws.value,
+        Weight: bind.weight.value,
+
     }
   });
   res.status(200).jsonp(result);

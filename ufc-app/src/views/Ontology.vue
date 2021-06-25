@@ -1,11 +1,10 @@
 <template>
   <div>
         <h1 style="text-align:center">ONTOLOGY DETAILS</h1>
-
          <div style="border:solid; width:500px; margin:auto; margin-top:50px;margin-bottom:50px;">
-           <p><b>INFERRED:  </b><u>{{info.inferred}}</u> </p>
-           <p><b>TOTAL:   </b><u>{{info.total}}</u></p>
-           <p><b>EXPLICIT: </b><u>{{info.explicit}}</u></p>
+           <p><b>Total statements:   </b><u>{{info.total}}</u></p>
+           <p><b>Inferred:  </b><u>{{info.inferred}}</u> </p>
+           <p><b>Explicit: </b><u>{{info.explicit}}</u></p>
        </div>
   </div>   
 </template>

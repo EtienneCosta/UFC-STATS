@@ -2,13 +2,14 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 var gdb = require('../utils/graphdb');
+var conversor = require('../utils/data');
+
 
 
 /* DETAILS OF A FIGHTER . */
 router.get('/:id',async function (req, res, next) {
     var query = `
-    select ?name ?nickname ?height ?weight ?reach ?stance ?wins ?losses ?draws  ?belt
-    ?dob ?sapm ?slpm ?stracc ?strdef ?subavg ?tdacc ?tdavg ?tddef  where { 
+    select * where { 
         :${req.params.id} a :Fighter ;
            :Name ?name ;
            :Nickname ?nickname;
@@ -61,12 +62,10 @@ router.get('/:id',async function (req, res, next) {
 
 
 
-/* LIST ALL FIGHTS OF A CERTAIN FIGHTER ??? MUDAR O TTL */
+/* LIST ALL FIGHTS OF A CERTAIN FIGHTER */
 router.get('/fights/:id',async function (req, res, next) {
     var query = `
-select ?fight ?redcorner  ?redcornerresult ?redcornerkd ?redsigstr ?redcornersubatt ?redcornertd
-?bluecorner ?bluecornerresult ?bluecornerkd ?bluesigstr ?bluecornersubatt  ?bluecornertd
-?method ?round ?time ?event ?eventname ?refereename ?timeformat ?bout ?date where { 
+select * where { 
 :${req.params.id} :participated ?fight .
  ?fight	:BlueCorner ?bluecorner ;
           :BlueCornerResult ?bluecornerresult;
@@ -89,7 +88,10 @@ select ?fight ?redcorner  ?redcornerresult ?redcornerkd ?redsigstr ?redcornersub
           :belong ?event.
           ?event :Name ?eventname ;
                  :Date ?date.
-          ?referee :Name ?refereename. } `
+          ?referee :Name ?refereename. } 
+    
+          order by desc (?date)
+    `
 
  var result = await gdb.execQuery(query);
  result = result.results.bindings.map(bind => {
@@ -110,7 +112,7 @@ select ?fight ?redcorner  ?redcornerresult ?redcornerkd ?redsigstr ?redcornersub
         method:bind.method.value,
         round:bind.round.value,
         time:bind.time.value,
-        date:bind.date.value,
+        date:conversor.conversorData(bind.date.value),
         referee:bind.refereename.value,
         bout:bind.bout.value,
         timeformat:bind.timeformat.value,

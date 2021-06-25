@@ -26,20 +26,35 @@
           Predictions
         </b-nav-item>
 
+        <b-nav-item href="/ufc/predictions/history">
+          <img class="drop-icon" src="@/assets/web.png" />
+        Predictions History 
+        </b-nav-item>
+
+
         <b-nav-item href="/ufc/stats">
           <img class="drop-icon" src="@/assets/interactive-display.png" />
           Stat Leaders
         </b-nav-item>
 
-         <b-nav-item href="#">
-          <img class="drop-icon" src="@/assets/register.png" />
-          Register Fighter 
+
+        <b-nav-item href="/ufc/rate-us">
+          <img class="drop-icon" src="@/assets/rating.png" />
+        Rate Us 
         </b-nav-item>
+
+         <b-nav-item href="/ufc/reviews">
+          <img class="drop-icon" src="@/assets/review.png"/>
+        Reviews 
+        </b-nav-item>
+
+       
 
         <b-nav-item href="/ufc/ontology/details">
           <img class="drop-icon" src="@/assets/information.png" />
         Ontology Details 
         </b-nav-item>
+
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>

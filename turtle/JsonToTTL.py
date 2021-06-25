@@ -1,6 +1,28 @@
 #!usr/bin/python3
 
 import json
+
+months = {
+        'January':'1',
+        'February':'2',
+        'March':'3',
+        'April':'4',
+        'May':'5',
+        'June':'6',
+        'July':'7',
+        'August':'8',
+        'September':'9',
+        'October':'10',
+        'November':'11',
+        'December':'12'
+}
+
+
+def conversorData(data:str)->str:
+        month,day,year=data.split(' ')
+        return year+'-'+months[month]+'-'+day
+
+
 with open('../web-scraping/JSON/ufc.json') as ufcJson : 
     data = json.load(ufcJson)
 
@@ -465,7 +487,7 @@ with open('../web-scraping/JSON/ufc.json') as ufcJson :
             :occurred :{location} ;
             :Date "{date}"^^xsd:string ;
             :Name "{name}"^^xsd:string .\n
-    """.format(id=e["Name"].replace('\'','').replace('!','').lower(),location=[key for key,value in locations.items() if value==e["Location"]][0],date=e["Date"],name=e["Name"].replace('_',' '))
+    """.format(id=e["Name"].replace('-','').replace('__','_').replace('\'','').replace('!','').lower(),location=[key for key,value in locations.items() if value==e["Location"]][0],date=conversorData(e["Date"]),name=e["Name"].replace('-','').replace('__',' ').replace('\'','').replace('!','').replace('_',' ') )
 
             for f in e["Fights"]:
                 
@@ -526,7 +548,7 @@ with open('../web-scraping/JSON/ufc.json') as ufcJson :
                                    :RedCornerTotalStrikes "{redcornertotalstrikes}"^^xsd:string .\n
 
     """.format(id=(e["Date"].replace(' ','_')+'_'+f["RedCorner"].split(' ')[1]+'_vs_'+f["BlueCorner"].split(' ')[1]).replace('\'','_').lower(),
-    event=e["Name"].replace('\'','').replace('!','').lower(),referee=f["Referee"].replace(' ','_').lower(),bout=f["Bout"],method=f["Method"],
+    event=e["Name"].replace('-','').replace('__','_').replace('\'','').replace('!','').lower(),referee=f["Referee"].replace('-','_').replace(' ','_').lower(),bout=f["Bout"],method=f["Method"],
     round=f["Round"],time=f["Time"],timeformat=f["TimeFormat"],bluecorner=f["BlueCorner"],redcorner=f["RedCorner"],
     bluecornerresult=f["BlueCornerResult"],redcornerresult=f["RedCornerResult"],
     bluecornerkd=f["Stats"]["BlueCorner"]["KD"],

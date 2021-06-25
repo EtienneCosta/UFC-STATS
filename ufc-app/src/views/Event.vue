@@ -18,7 +18,7 @@ export default {
 
     data: function(){
       return{
-        event_details:{}
+        event_details:{},
       }
     },
 
@@ -32,6 +32,8 @@ export default {
           .get("http://localhost:8079/ufc/events/details/"+this.$route.params.id)
           .then((res) => {
              this.event_details = res.data[0];
+             
+             this.flag=true
         })
         .catch((e) => {
           console.log("Error on obtaining the event details ::" + e);
@@ -41,3 +43,6 @@ export default {
     
 };
 </script>
+
+
+

@@ -163,6 +163,27 @@ export default {
 
     methods:{
 
+
+      registerPrediction: async function(fighter1,fighter2,winner,confidence){
+          var predicition = {
+            'favourite':fighter1,
+            'underdog':fighter2,
+            'winner':winner,
+            'confidence':confidence+' %'
+          }
+
+          axios.post('http://localhost:8078/predictions/',predicition)
+          .then(res=>{
+              console.log('Prediction registered ...');
+          })
+          .catch(e=>{
+            console.log('Error posting the prediction '+e);
+          })
+
+      }
+
+      ,
+
       predictFight: async function(){
         var fighter1=this.favourite
         var fighter2=this.underdog
@@ -175,6 +196,7 @@ export default {
                 console.log(res.data);
                 this.winner=res.data.winner;
                 this.confidence=parseFloat(res.data.confidence).toFixed(2)*100;
+                this.registerPrediction(fighter1,fighter2,this.winner,this.confidence);
                 this.dialog=true;
               })
               .catch(e=>{

@@ -6,8 +6,7 @@ var gdb = require('../utils/graphdb');
 /* List all fighters */
 router.get('/', async function (req, res) {
     var query = `
-    select ?s ?name ?nickname ?height ?weight ?reach ?stance ?wins ?losses ?draws  ?belt
-    ?dob ?sapm ?slpm ?stracc ?strdef ?subavg ?tdacc ?tdavg ?tddef  where { 
+    select *  where { 
         ?s a :Fighter ;
            :Name ?name ;
            :Nickname ?nickname;
@@ -79,7 +78,6 @@ router.get('/names', async function (req, res) {
             name:bind.name.value,
           }
         });
-        console.log(result)
         res.status(200).jsonp(result);
 
 })

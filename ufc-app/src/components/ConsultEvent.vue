@@ -1,4 +1,6 @@
 <template>
+
+
   <div>
     <h1 style="color:red; text-align:center; margin-top:30px;">{{this.details.name}}</h1>
     <div style="border-style: ridge; width:40%; margin:auto; margin-top:50px; margin-down:50px;">
@@ -8,7 +10,7 @@
 
     <div style="margin-top:50px;">
       <b-table-simple
-        style="width: 75%; margin: auto; margin-bottom: 35px"
+        style="width: 95%; margin: auto; margin-bottom: 35px"
         hover
         large
         responsive
@@ -132,3 +134,4 @@ methods:{
     }
 };
 </script>
+
