@@ -43,7 +43,6 @@ $ docker-compose -f docker-compose.yml up
 ![Screenshot](Report/imagens/Special%20Efects/PageNotFound.png)
 
 ## Props
-
-Charles Pierse Predictions : https://github.com/cdpierse/ufc_fight_predictor
+- [Charles Pierse Predictions](https://github.com/cdpierse/ufc_fight_predictor)- UFC FIGHT PREDICTOR.
 
 
