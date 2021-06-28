@@ -1,0 +1,37 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    volumes:
+      - db-data:/data/db
+    ports:
+      - "27017:27017"
+  graphdb-ufc:
+    image: etiennecosta/graphdb-ufc
+    ports:
+      - "7200:7200"
+  
+  sparql-api-ufc:
+    image: etiennecosta/sparql-api-ufc:latest
+    restart: on-failure
+    links:
+      - graphdb-ufc
+    ports:
+      - "8079:8079"
+
+  mongodb-ufc:
+    image: etiennecosta/mongodb-ufc
+    restart: on-failure
+    links:
+      - mongo
+    ports:
+      - "8078:8078"
+
+  interface-vue-ufc:
+    image: etiennecosta/interface-vue-ufc
+    links:
+      - mongodb-ufc
+    ports:
+      - "8080:7777"
+volumes:
+  db-data:
