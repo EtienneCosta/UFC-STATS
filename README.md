@@ -42,4 +42,8 @@ $ docker-compose -f docker-compose.yml up
 ## 404 
 ![Screenshot](Report/imagens/Special%20Efects/PageNotFound.png)
 
+## Props
+
+Charles Pierse Predictions : https://github.com/cdpierse/ufc_fight_predictor
+
 
