@@ -2,7 +2,8 @@
 
 
   <div>
-    <h1 style="color:red; text-align:center; margin-top:30px;">{{this.details.name}}</h1>
+
+    <h1 style="color:firebrick; text-align:center; margin-top:30px;font-family:Permanent Marker;">{{this.details.name}}</h1>
     <div style="border-style: ridge; width:40%; margin:auto; margin-top:50px; margin-down:50px;">
         <span style="margin-left:5px;"><b>LOCATION: </b>{{this.details.location}}</span>
         <span style="margin-left:40px;"><b>DATE: </b>{{this.details.date}}</span>

@@ -2,7 +2,7 @@
   <div>
     <v-app id="inspire">
       <v-card>
-        <v-card-title>
+        <v-card-title style="font-family:Permanent Marker;font-size:30px;">
           <img
             src="@/assets/boxing-ring.png"
             width="50"

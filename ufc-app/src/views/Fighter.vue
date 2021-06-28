@@ -2,9 +2,10 @@
   <div>
       <div>
         <br />
-        <h1>{{ this.fighter.name }}</h1>
-        <h4>"{{ this.fighter.nickname }}"</h4>
-        <h5>
+
+        <h1 style="font-family:Permanent Marker;color:firebrick;">{{ this.fighter.name }}</h1>
+        <h4 style="font-family:Permanent Marker;color:black;">"{{ this.fighter.nickname }}"</h4>
+        <h5 style="font-family:Permanent Marker;color:black;">
           Record: {{ this.fighter.wins }}-{{ this.fighter.losses }}-{{
             this.fighter.draws
           }}

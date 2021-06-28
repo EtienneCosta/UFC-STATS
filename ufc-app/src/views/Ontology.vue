@@ -1,6 +1,6 @@
 <template>
   <div>
-        <h1 style="text-align:center">ONTOLOGY DETAILS</h1>
+        <h1 style="font-family:Permanent Marker;text-align:center">ONTOLOGY DETAILS</h1>
          <div style="border:solid; width:500px; margin:auto; margin-top:50px;margin-bottom:50px;">
            <p><b>Total statements:   </b><u>{{info.total}}</u></p>
            <p><b>Inferred:  </b><u>{{info.inferred}}</u> </p>

@@ -16,7 +16,7 @@
         </template>
 
         <v-card style="background-color:white;" class="elevation-2">
-        <v-card-title style="color:red; font-weight:bold;" class="text-h5">
+        <v-card-title style="font-family:Permanent Marker !important;color:firebrick; font-weight:bold;" class="text-h5">
             {{review.name}}
         </v-card-title>
         <v-card-text style="color:black; font-weight:bold;">

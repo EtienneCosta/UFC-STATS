@@ -9,6 +9,7 @@
         color: black;
         text-align: center;
         margin-top: 50px;
+        font-family:Permanent Marker;
       "
     >
       RECORD BOOK

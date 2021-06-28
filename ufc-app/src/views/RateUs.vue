@@ -6,7 +6,7 @@
   >
    
   <div id="app" style="width:500px; margin-left:15%;">
-    <h3 style="text-align:center; color:firebrick;margin-top:20px;"> Rate Our Site</h3>
+    <h3 style="font-family:Permanent Marker;text-align:center; color:firebrick;margin-top:20px;"> Rate Our Site</h3>
 
        <v-card-text>
       If you enjoy using <i>UFC STATS</i>, please take a few seconds to rate your experience with the website. It really helps!

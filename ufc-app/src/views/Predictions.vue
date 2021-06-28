@@ -2,11 +2,11 @@
 
  <div class="predict" >
 
-    <h1 style="text-align:center; padding-top:50px;">UFC Fight Predictions</h1>
+    <h1 style="font-family:Permanent Marker;text-align:center; padding-top:50px;">UFC Fight Predictions</h1>
     <div class="wrapper">
 
             <v-app class="favourite">
-                <h3>Favourite Fighter</h3>
+                <h3 style="font-family:Permanent Marker;color:firebrick;">Favourite Fighter</h3>
               <v-container fluid>
                  
                    <v-autocomplete
@@ -27,7 +27,7 @@
         </v-app>
 
      <v-app class="underdog">
-                <h3>Underdog Fighter</h3>
+                <h3 style="font-family:Permanent Marker;color:firebrick;">Underdog Fighter</h3>
               <v-container fluid>
                          
                    <v-autocomplete
