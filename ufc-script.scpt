@@ -2,7 +2,7 @@
 #            UFC Predictions & Stats Script Template - macOS BigSur	           #
 #                                                                              #
 # Change History                                                               #
-# 04/06/2021  Etienne Costa                                                    #
+# 28/06/2021  Etienne Costa                                                    #
 #             				                                                   #
 #             			                                                       #
 #                                                                              #
