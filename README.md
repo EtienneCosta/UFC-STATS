@@ -14,7 +14,7 @@ $ docker-compose -f docker-compose.yml up
 
 
 ## HomePage
-![Screenshot](Report/imagens/HomePage/homepage1.png)
+![Screenshot](Report/imagens/HomePage/homepage.png)
 ![Screenshot](Report/imagens/HomePage/NavBar.png)
 
 ## Events
